@@ -1,0 +1,10 @@
+<div>
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <label for="room_name">Room name: </label>
+        <input id="room_name" type="text" name="room_name">
+        <input type="submit" value="OK">
+        OR
+        <input type="submit" value="Create a room">
+    </form>
+</div>
