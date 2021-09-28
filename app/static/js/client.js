@@ -27,12 +27,10 @@ window.onbeforeunload = function (e) {
 const roomName = JSON.parse(document.getElementById("room-name").textContent);
 const userName = JSON.parse(document.getElementById("user-name").textContent);
 
-let editing;
-let receiving;
-
 const chatSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/app/" + roomName + "/"
 );
+
 
 chatSocket.onopen = function (event) {
     chatSocket.send(
@@ -44,12 +42,19 @@ chatSocket.onopen = function (event) {
 };
 
 var editorDom = document.querySelector("#editor");
-var editor = ace.edit(editorDom);
+var editor = ace.edit(editorDom, {
+    mode: "ace/mode/javascript",
+    selectionStyle: "text",
+    enableLiveAutocompletion: false,
+    enableLiveAutocompletion: true,
+    //enableSnippets: true
+});
+editor.session.setOption("useWorker", false);
 
 const keystrokeDetector = document.querySelector("#keystroke-detector");
 
-keystrokeDetector.addEventListener("keyup", function () {
-    console.log("KEY DETECTED");
+keystrokeDetector.addEventListener("keyup", function (e) {
+
     chatSocket.send(
         JSON.stringify({
             event: "CODE",
@@ -60,19 +65,6 @@ keystrokeDetector.addEventListener("keyup", function () {
 
 })
 
-
-//editor.setTheme("ace/theme/monokai");
-//editor.session.setMode("ace/mode/javascript");
-
-// const codeDom = document.querySelector("#code");
-// codeDom.addEventListener("input", function () {
-//     console.log(codeDom.value);
-//     chatSocket.send(JSON.stringify({
-//         'event': "CODE",
-//         'user_name': userName,
-//         'message': codeDom.value,
-//     }));
-// })
 
 chatSocket.onmessage = function (e) {
     if (e["data"] instanceof Blob) {
@@ -91,18 +83,13 @@ chatSocket.onmessage = function (e) {
                     data.user_name + ": " + data.message + "\n";
             }
         } else if (data.event == "CODE") {
-            console.log(data);
-
-            console.log(data.message);
-            //codeDom.value = data.message;
-            var row = editor.session.getLength() - 1
-            var column = editor.session.getLine(row).length // or simply Infinity
-            
-            editor.getSession().setValue(data.message);
-            editor.gotoLine(row + 1, column);
-            //editor.navigateLineEnd();
+            if (data.user_name != userName) {
+                editor.getSession().setValue(data.message);
+            }
         } else {
             document.querySelector("#chat-text").value += data.message + "\n";
         }
     }
+
+
 };

@@ -30,7 +30,6 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
             if event == "MSG":
                 message = text_data_json['message']
-                print(message)
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
@@ -76,8 +75,6 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         message = event_data['message']
         user_name = event_data['user_name']
         event = event_data['event']
-
-        print("Inside chatroom_message", message, user_name, event)
 
         await self.send(text_data=json.dumps({
             'event': event,
