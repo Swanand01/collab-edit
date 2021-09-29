@@ -1,43 +1,61 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {% load static %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="{% static '/js/style.css' %}">
-    </link>
+  {% load static %}
 
-    <title>RT Chat</title>
-    
-  </head>
-  <body>
+  <link rel="stylesheet" href="{% static '/js/style.css' %}">
+  </link>
 
-    <div class="container">
-      <div id="keystroke-detector">
-        <div id="editor">DEFAULT</div>
-      </div>
+  <title>RT Chat</title>
 
-      <div>
-        <textarea class="messages" id="chat-text"></textarea><br>
-        <input class="message-box" id="input" type="text"></br>
-        <input id="submit" type="button" value="Send">
-        <input id="leave" type="button" value="Leave">
-      </div>
+</head>
+
+<body>
+
+  <div class="container">
+    <div id="keystroke-detector">
+      <div id="editor">DEFAULT</div>
     </div>
-    
 
-    {{ room_name|json_script:"room-name" }}
-    {{ user_name|json_script:"user-name" }}
+    <div>
+      <textarea class="messages" id="chat-text"></textarea><br>
+      <input class="message-box" id="input" type="text"><br>
+      <input id="submit" type="button" value="Send">
+      <input id="leave" type="button" value="Leave">
+      <input id="run" type="button" value="Run">
       
-    <script src="{% static '/js/ace.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static '/js/ext-language_tools.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static '/js/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
+      <label for="cars">Language:</label>
+      <select id="language">
+        <option value="cpp">C++</option>
+        <option value="c">C</option>
+        <option value="python">Python 3</option>
+      </select>
 
-    <script src="{% static '/js/client.js' %}" type="text/javascript"></script>
+      <textarea class="output-box" id="output-text"></textarea><br>
+      
+    </div>
 
 
-  </body>
+
+
+  </div>
+
+
+  {{ room_name|json_script:"room-name" }}
+  {{ user_name|json_script:"user-name" }}
+
+  <script src="{% static '/js/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static '/js/ext-language_tools.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static '/js/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
+
+  <script src="{% static '/js/client.js' %}" type="text/javascript"></script>
+
+
+</body>
+
 </html>

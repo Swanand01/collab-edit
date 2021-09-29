@@ -21,6 +21,11 @@ body {
   width: 100%;
   resize: none;
 }
+.output-box {
+  height: 50%;
+  width: 100%;
+  resize: none;
+}
 
 .message-box {
   width: 100%;
