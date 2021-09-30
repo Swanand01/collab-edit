@@ -26,6 +26,11 @@ body {
   width: 100%;
   resize: none;
 }
+.input-box {
+  height: 50%;
+  width: 100%;
+  resize: none;
+}
 
 .message-box {
   width: 100%;

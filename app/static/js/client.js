@@ -10,7 +10,7 @@ const chatSocket = new WebSocket(
 
 var editorDom = document.querySelector("#editor");
 var editor = ace.edit(editorDom, {
-    mode: "ace/mode/python",
+    mode: "ace/mode/c_cpp",
     selectionStyle: "text",
     enableLiveAutocompletion: false,
     enableLiveAutocompletion: true,
@@ -41,6 +41,7 @@ document.querySelector("#submit").onclick = function (e) {
 document.querySelector("#run").onclick = function (e) {
     let code = editor.getSession().getValue();
     let language = languageDropdown.options[languageDropdown.selectedIndex].value;
+    let input = document.querySelector("#input-text").value
 
     let version;
 
@@ -61,6 +62,7 @@ document.querySelector("#run").onclick = function (e) {
     var raw = JSON.stringify({
         "language": language,
         "version": version,
+        "stdin": input,
         "files": [
             {
                 "content": code
