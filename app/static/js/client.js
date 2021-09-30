@@ -104,7 +104,7 @@ window.onbeforeunload = function (e) {
     chatSocket.close();
 };
 
-document.getElementById("language").addEventListener('change', function () {
+languageDropdown.addEventListener('change', function () {
     var lang = this.value;
     console.log('You selected: ', lang);
     chatSocket.send(
