@@ -1,6 +1,5 @@
 from asyncio.runners import run
 from channels.generic.websocket import AsyncWebsocketConsumer
-from pyston import PystonClient
 import json
 
 
@@ -55,17 +54,13 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
             elif event == "RUN":
                 message = text_data_json['message']
-                language = text_data_json['language']
-
-                client = PystonClient()
-                output = await client.execute(language=language, code=message, stdin="")
 
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
                         'type': 'code_run',
                         'event': event,
-                        'message': output.output,
+                        'message': message,
                     }
                 )
 
@@ -85,6 +80,17 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                         'type': 'close_conn',
                         'event': event,
                         'user_name': user_name,
+                    }
+                )
+            elif event == "LANG_CHANGE":
+                message = text_data_json['message']
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'lang_change',
+                        'event': event,
+                        'user_name': user_name,
+                        'message': message,
                     }
                 )
 
@@ -131,4 +137,13 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
         await self.send(text_data=json.dumps({
             'message': f"{user_name} has left.",
+        }))
+
+    async def lang_change(self, event_data):
+        lang = event_data['message']
+        event = event_data['event']
+        
+        await self.send(text_data=json.dumps({
+            'event': event,
+            'message': lang,
         }))

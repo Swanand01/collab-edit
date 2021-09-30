@@ -1,6 +1,9 @@
 const roomName = JSON.parse(document.getElementById("room-name").textContent);
 const userName = JSON.parse(document.getElementById("user-name").textContent);
 
+let languageDropdown = document.getElementById('language');
+
+
 const chatSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/app/" + roomName + "/"
 );
@@ -37,19 +40,56 @@ document.querySelector("#submit").onclick = function (e) {
 
 document.querySelector("#run").onclick = function (e) {
     let code = editor.getSession().getValue();
-    let languageDropdown = document.getElementById('language');
     let language = languageDropdown.options[languageDropdown.selectedIndex].value;
 
-    chatSocket.send(
-        JSON.stringify({
-            event: "RUN",
-            user_name: userName,
-            message: code,
-            language: language
-        })
-    );
+    let version;
+
+    if (language == "python") {
+        version = "3.9.4"
+    }
+    else if (language == "c" | language == "cpp") {
+        version = "10.2.0"
+    }
+
 
     document.querySelector("#output-text").value = "Running..." + "\n";
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
+    myHeaders.append("Cookie", "engineerman.sid=s%3AjOc8eeGMoYq0WHTJ5MmKVuSzOHHdRZxA.pdnIbtrx5vDkho62y1WSEgB7ASyJ8y7%2Fh%2FCr6yvu4OM");
+
+    var raw = JSON.stringify({
+        "language": language,
+        "version": version,
+        "files": [
+            {
+                "content": code
+            }
+        ]
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("https://emkc.org/api/v2/piston/execute", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            document.querySelector("#output-text").value = result.run.output + "\n";
+            chatSocket.send(
+                JSON.stringify({
+                    event: "RUN",
+                    user_name: userName,
+                    message: result.run.output,
+                })
+            );
+        })
+        .catch(error => {
+            document.querySelector("#output-text").value = error + "\n";
+        });
 
 };
 
@@ -64,7 +104,17 @@ window.onbeforeunload = function (e) {
     chatSocket.close();
 };
 
-
+document.getElementById("language").addEventListener('change', function () {
+    var lang = this.value;
+    console.log('You selected: ', lang);
+    chatSocket.send(
+        JSON.stringify({
+            event: "LANG_CHANGE",
+            user_name: userName,
+            message: lang
+        })
+    );
+});
 
 chatSocket.onopen = function (event) {
     chatSocket.send(
@@ -106,8 +156,13 @@ chatSocket.onmessage = function (e) {
             editor.getSession().setValue(data.message);
         }
     } else if (data.event == "RUN") {
-        document.querySelector("#output-text").value = data.message + "\n";
-
+        if (data.user_name != userName) {
+            document.querySelector("#output-text").value = data.message + "\n";
+        }
+    } else if (data.event == "LANG_CHANGE") {
+        if (data.user_name != userName) {
+            document.getElementById("language").value = data.message;
+        }
     } else {
         document.querySelector("#chat-text").value += data.message + "\n";
     }
