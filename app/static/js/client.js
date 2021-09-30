@@ -10,7 +10,7 @@ const chatSocket = new WebSocket(
 
 var editorDom = document.querySelector("#editor");
 var editor = ace.edit(editorDom, {
-    mode: "ace/mode/javascript",
+    mode: "ace/mode/python",
     selectionStyle: "text",
     enableLiveAutocompletion: false,
     enableLiveAutocompletion: true,
@@ -114,6 +114,11 @@ languageDropdown.addEventListener('change', function () {
             message: lang
         })
     );
+    if (lang == "c" | lang == "cpp") {
+        editor.getSession().setMode("ace/mode/" + "c_cpp");
+    } else {
+        editor.getSession().setMode("ace/mode/" + lang);
+    }
 });
 
 chatSocket.onopen = function (event) {
@@ -162,6 +167,11 @@ chatSocket.onmessage = function (e) {
     } else if (data.event == "LANG_CHANGE") {
         if (data.user_name != userName) {
             document.getElementById("language").value = data.message;
+            if (data.message == "c" | data.message == "cpp") {
+                editor.getSession().setMode("ace/mode/" + "c_cpp");
+            } else {
+                editor.getSession().setMode("ace/mode/" + data.message);
+            }
         }
     } else {
         document.querySelector("#chat-text").value += data.message + "\n";

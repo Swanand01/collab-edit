@@ -142,7 +142,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
     async def lang_change(self, event_data):
         lang = event_data['message']
         event = event_data['event']
-        
+
         await self.send(text_data=json.dumps({
             'event': event,
             'message': lang,
