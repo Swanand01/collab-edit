@@ -29,6 +29,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
             if event == "MSG":
                 message = text_data_json['message']
+                print("MESSAGE: ",message)
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
@@ -39,30 +40,17 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                     }
                 )
 
-            elif event == "CODE":
+            elif event == "TEXT_CHANGE":
                 message = text_data_json['message']
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {
-                        'type': 'code',
+                        'type': 'text_change',
                         'event': event,
                         'user_name': user_name,
                         'message': message,
                     }
                 )
-
-            elif event == "RUN":
-                message = text_data_json['message']
-
-                await self.channel_layer.group_send(
-                    self.room_group_name,
-                    {
-                        'type': 'code_run',
-                        'event': event,
-                        'message': message,
-                    }
-                )
-
             elif event == "OPEN":
                 await self.channel_layer.group_send(
                     self.room_group_name,
@@ -81,17 +69,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                         'user_name': user_name,
                     }
                 )
-            elif event == "LANG_CHANGE":
-                message = text_data_json['message']
-                await self.channel_layer.group_send(
-                    self.room_group_name,
-                    {
-                        'type': 'lang_change',
-                        'event': event,
-                        'user_name': user_name,
-                        'message': message,
-                    }
-                )
+            
 
     async def chatroom_message(self, event_data):
         message = event_data['message']
@@ -104,7 +82,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             'message': message,
         }))
 
-    async def code(self, event_data):
+    async def text_change(self, event_data):
         message = event_data['message']
         user_name = event_data['user_name']
         event = event_data['event']
@@ -115,14 +93,6 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             'user_name': user_name,
         }))
 
-    async def code_run(self, event_data):
-        output = event_data['message']
-        event = event_data['event']
-
-        await self.send(text_data=json.dumps({
-            'event': event,
-            'message': output,
-        }))
 
     async def open_chat(self, event_data):
         user_name = event_data['user_name']
@@ -138,11 +108,4 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             'message': f"{user_name} has left.",
         }))
 
-    async def lang_change(self, event_data):
-        lang = event_data['message']
-        event = event_data['event']
 
-        await self.send(text_data=json.dumps({
-            'event': event,
-            'message': lang,
-        }))
