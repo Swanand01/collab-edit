@@ -1,17 +1,21 @@
-const roomName = JSON.parse(document.getElementById("room-name").textContent);
+const fileId = JSON.parse(document.getElementById("file_id").textContent);
 const userName = JSON.parse(document.getElementById("user-name").textContent);
+let content = JSON.parse(document.getElementById("content").textContent);
 
 const chatSocket = new WebSocket(
-    "ws://" + window.location.host + "/ws/app/" + roomName + "/"
+    "ws://" + window.location.host + "/ws/app/" + fileId + "/"
 );
 
 var quill = new Quill('#editor', {
     theme: 'snow'
 });
 
+quill.setContents(JSON.parse(content));
+
 let revealChat = document.getElementById("chat");
 let flag = true;
 
+let saveButton = document.getElementById("save");
 
 const messageInputDom = document.querySelector("#message-box");
 
@@ -29,6 +33,19 @@ function sendMessage() {
     }
 }
 
+function saveDocument() {
+    content = quill.getContents()
+    chatSocket.send(
+        JSON.stringify({
+            event: "SAVE",
+            user_name: userName,
+            message: content,
+        })
+    );
+    console.log("SENT FROM JS:");
+    console.log(content);
+}
+
 quill.on('text-change', function (delta, oldDelta, source) {
     if (source !== 'user') return
     chatSocket.send(
@@ -41,7 +58,6 @@ quill.on('text-change', function (delta, oldDelta, source) {
 });
 
 document.querySelector("#submit").onclick = sendMessage
-
 
 window.onbeforeunload = function (e) {
     chatSocket.send(
@@ -107,3 +123,6 @@ document.querySelector("#message-box").addEventListener("keyup", function (event
         sendMessage();
     }
 });
+
+
+saveButton.onclick = saveDocument;

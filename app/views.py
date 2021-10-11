@@ -1,18 +1,19 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 import string
 import random
 from django.contrib.auth.decorators import login_required
+from .models import CustomUser, Document
+from .admin import CustomUserCreationForm
 
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     context = {"form": form}
     return render(request, 'register.html', context)
@@ -20,27 +21,38 @@ def register(request):
 
 @login_required
 def index(request):
+    uname = str(request.user)
+    request.session['user_name'] = uname
     if request.method == "POST":
-        uname = str(request.user)
-        room_name = request.POST.get('room_name')
-        request.session['user_name'] = uname
-        if room_name == "":
-            room_name = ''.join(random.choices(
-                string.ascii_uppercase + string.digits, k=6))
 
-        if uname != "" and room_name != "":
-            return redirect(f'{room_name}/')
+        file_name = request.POST.get('file_name')
+        file_id = ''.join(random.choices(
+            string.ascii_letters + string.digits, k=24))
+
+        user = CustomUser.objects.get(user_name=uname)
+
+        d = Document(owner=user, name=file_name, document_id=file_id)
+        d.save()
+
+        if uname != "":
+            return redirect(f'{file_id}/')
     return render(request, 'index.html', {})
 
 
 @login_required
-def room(request, room_name):
+def room(request, file_id):
     uname = request.session.get('user_name')
+
+    doc = Document.objects.get(document_id=file_id)
+    content = doc.content
+
+    print(uname)
 
     if uname != None and uname != "":
         return render(request, 'chatroom.html', {
             "user_name": request.session.get('user_name'),
-            "room_name": room_name
+            "file_id": file_id,
+            "content": content
         })
     else:
         return redirect('/app')

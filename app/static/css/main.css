@@ -85,6 +85,11 @@ nav{
   border: none;
 }
 
+#save{
+  background-color:#64dd17;
+  border: none;
+}
+
 #leave{
   background-color: #E44235;
   border: none;
