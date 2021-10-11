@@ -1,4 +1,3 @@
-from asyncio.runners import run
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 

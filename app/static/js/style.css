@@ -8,14 +8,14 @@ body {
   height: 100%;
 }
 
-.container {
+/* .container {
   height: 100%;
   width: 100%;
   background-color: rgb(64, 149, 64);
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
-
+} */
+/* 
 .messages {
   height: 50%;
   width: 100%;
@@ -30,9 +30,9 @@ body {
   height: 50%;
   width: 100%;
   resize: none;
-}
+} */
 
-.message-box {
+/* .message-box {
   width: 100%;
   resize: none;
-}
+} */
