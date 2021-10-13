@@ -45,13 +45,14 @@ def room(request, file_id):
 
     doc = Document.objects.get(document_id=file_id)
     content = doc.content
+    filename = doc.name
 
-    print(uname)
 
     if uname != None and uname != "":
         return render(request, 'chatroom.html', {
             "user_name": request.session.get('user_name'),
             "file_id": file_id,
+            "filename": filename,
             "content": content
         })
     else:

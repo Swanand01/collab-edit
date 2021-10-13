@@ -23,15 +23,16 @@
 
 <body>
   <nav>
-    <h1 class="navbar-title">Collab-edit</h1>
-    <h2 class="navbar-name">{{ user_name }}</h2>
-    <h2 class="room-id">{{ file_id }}</h2>
-    <button id="chat"><i id="icon" class="material-icons">chat</i></button>
-    <button id="save"><i id="icon" class="material-icons">save</i></button>
-    <button id="leave">
-      <i id="icon" class="material-icons">exit_to_app</i>
-      <h1>Leave</h1>
-    </button>
+    <div id="navbar-title">
+      <h1 class="navbar-title">Collab-edit</h1>
+    </div>
+    <div id="navbar-filename">
+      <h2 class="room-id">{{ filename }}</h2>
+    </div>
+    <div>
+      <button class="navbar-button" id="save"><i id="icon" class="material-icons">save</i></button>
+      <button class="navbar-button" id="chat"><i id="icon" class="material-icons">chat</i></button>
+    </div>
   </nav>
 
   <div class="editor-container">
@@ -42,7 +43,7 @@
     <div id="chat-text"></div>
     <div class="send">
       <input id="message-box" type="text">
-      <button id="submit">send</button>
+      <button class="navbar-button" id="submit"><i id="icon" class="material-icons">send</i></button>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *{
   margin: 0;
@@ -11,6 +11,7 @@ html{
 }
 
 body{
+  background-color: ghostwhite;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr;
@@ -18,17 +19,17 @@ body{
   "nav    nav"
   "editor message"
   ;
-  height: 94vh;
+  height: 100vh;
 }
 
 nav{
-  background-color: #64dd17;
+  background-color: #4d167d;
   grid-area: nav;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .editor-container{
@@ -44,6 +45,7 @@ nav{
 }
 
 #chat-text{
+  background-color: #ffffff;
   resize: none;
   height: 100%;
   border:1px solid black;
@@ -61,44 +63,38 @@ nav{
 }
 
 #message-box{
+  background-color: #ffffff;
   border-radius: 1rem;
   padding: 1rem;
   border: 1px solid rgb(66, 65, 65);
 }
 
 #submit{
-  padding: 1rem;
-  background-color: #64dd17;
-  color: white;
-  border: none;
-  font-size: 1.5rem;
+  background-color: #ffffff;
+  color: #64dd17;
+  border:2px solid #64dd17;
   border-radius: 1rem;
-  font-weight: 500;
 }
 
 #icon{
   font-size:3rem;
 }
 
-#chat{
-  background-color:#64dd17;
+.navbar-button{
   border: none;
+  height: 4rem;
+  width: 8rem;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }
 
-#save{
-  background-color:#64dd17;
-  border: none;
+.navbar-button:hover {background-color: #dbd4d4}
+
+.navbar-button:active{
+  transform: scale(0.98);
 }
 
-#leave{
-  background-color: #E44235;
-  border: none;
-  padding: 0.7rem;
-  display: flex;
-  align-items: center;
-  border-radius: 1rem;
+#navbar-title, #navbar-filename{
+  cursor: pointer;
+  color: ghostwhite;
 }
-
-
-
-

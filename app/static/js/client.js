@@ -42,8 +42,6 @@ function saveDocument() {
             message: content,
         })
     );
-    console.log("SENT FROM JS:");
-    console.log(content);
 }
 
 quill.on('text-change', function (delta, oldDelta, source) {

@@ -55,5 +55,3 @@ class Document(models.Model):
     name = models.CharField(max_length=50)
     document_id = models.CharField(max_length=24)
     content = models.TextField(default="")
-
-    
