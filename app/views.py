@@ -45,7 +45,6 @@ def index(request):
 @login_required
 def room(request, file_id):
     uname = request.session.get('user_name')
-    print(uname)
 
     doc = Document.objects.get(document_id=file_id)
     content = doc.content
