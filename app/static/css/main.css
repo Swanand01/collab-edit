@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+.ql-container {
+  font-size: 20px;
+}
+
 *{
   margin: 0;
   padding: 0;
