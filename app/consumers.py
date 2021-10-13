@@ -7,11 +7,8 @@ from channels.db import database_sync_to_async
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def create_chat(self, content):
-        print("RECEIVED INSIDE FUNC", content)
         doc = Document.objects.get(
             document_id=self.file_id)
-        print(doc.document_id)
-        print(doc.name)
         doc.content = content
         doc.save()
 
@@ -64,7 +61,6 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                 )
             elif event == "SAVE":
                 content = json.dumps(text_data_json['message']['ops'])
-                print("RECEIVED:", content)
                 await self.create_chat(content)
 
             elif event == "OPEN":

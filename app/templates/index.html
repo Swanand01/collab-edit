@@ -5,4 +5,9 @@
         <input id="file_name" type="text" name="file_name" required>
         <input type="submit" value="Create a file">
     </form>
+    {% if documents %}
+    {% for document in documents %}
+    <a href="{% url 'room' document.document_id %}">{{ document.name }}</a>
+    {% endfor %}
+    {% endif %}
 </div>

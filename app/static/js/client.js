@@ -10,7 +10,9 @@ var quill = new Quill('#editor', {
     theme: 'snow'
 });
 
-quill.setContents(JSON.parse(content));
+if (content != "") {
+    quill.setContents(JSON.parse(content));
+}
 
 let revealChat = document.getElementById("chat");
 let flag = true;

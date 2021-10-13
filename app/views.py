@@ -23,30 +23,33 @@ def register(request):
 def index(request):
     uname = str(request.user)
     request.session['user_name'] = uname
+    user = CustomUser.objects.get(user_name=uname)
+
+    documents = Document.objects.filter(owner=user)
+    print(documents)
+
     if request.method == "POST":
 
         file_name = request.POST.get('file_name')
         file_id = ''.join(random.choices(
             string.ascii_letters + string.digits, k=24))
 
-        user = CustomUser.objects.get(user_name=uname)
-
         d = Document(owner=user, name=file_name, document_id=file_id)
         d.save()
 
         if uname != "":
             return redirect(f'{file_id}/')
-    return render(request, 'index.html', {})
+    return render(request, 'index.html', {"documents": documents})
 
 
 @login_required
 def room(request, file_id):
     uname = request.session.get('user_name')
+    print(uname)
 
     doc = Document.objects.get(document_id=file_id)
     content = doc.content
     filename = doc.name
-
 
     if uname != None and uname != "":
         return render(request, 'chatroom.html', {
