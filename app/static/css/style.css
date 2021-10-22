@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #4d167d;
+    color: white;
+}
+
+.cards{
+    display: grid;
+    place-items: center;
+    height: 20rem;
+    background-color: white;
+    box-shadow: 1px 1px 6px 4px rgba(0,0,0,0.15);
+    border-radius: 0.5rem;
+    cursor:pointer;
+}
+
+.cards a{
+    text-decoration: none;
+    font-size: 1.7rem;
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 15rem);
+    justify-content: space-evenly;
+    grid-gap:2rem;
+    padding:1rem;
+}
+
+#addFile-btn{
+    display: grid;
+    place-items: center;
+}
+
+#addFile-btn i{
+    font-size: 8rem;
+}
+
+
+.create-file-popup
+{
+    display: none;
+    z-index: 9;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+}
+.form-container
+{
+    background-color: white;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+    grid-gap:2rem;
+    width: 30rem;
+    /* background-color: coral; */
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 43px -1px grey;
+
+}
+
+#file_name{
+    width: 75%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #F0F0F0;
+    text-align: center;
+}
+#submit-btn{
+    width: 15rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color:#4d167d;
+    color: white;
+}
+
+#close-popup-container{
+    z-index: 8;
+    display: none;
+    position: absolute;
+    height: calc(100vh - 44px);
+    width: 100%;
+}
+
+#file-icon{
+    font-size: 8rem;
+    opacity: 0.6;
+}

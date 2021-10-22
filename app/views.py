@@ -39,7 +39,7 @@ def index(request):
 
         if uname != "":
             return redirect(f'{file_id}/')
-    return render(request, 'index.html', {"documents": documents})
+    return render(request, 'index.html', {"documents": documents, "user_name": user.user_name})
 
 
 @login_required
