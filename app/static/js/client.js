@@ -2,40 +2,27 @@ const fileId = JSON.parse(document.getElementById("file_id").textContent);
 const userName = JSON.parse(document.getElementById("user-name").textContent);
 let content = JSON.parse(document.getElementById("content").textContent);
 
-var toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
-
-    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
-
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-
-    ['clean']                                         // remove formatting button
-];
-
 const chatSocket = new WebSocket(
     "ws://" + window.location.host + "/ws/app/" + fileId + "/"
 );
 
 var quill = new Quill('#editor', {
-    theme: 'snow',
-    modules: {
-        toolbar: toolbarOptions
-    }
+    theme: 'snow'
 });
 
 if (content != "") {
     quill.setContents(JSON.parse(content));
 }
+
+const resize_ob = new ResizeObserver(function (entries) {
+    let rect = entries[0].contentRect;
+    let height = rect.height;
+    console.log("toolbar h", height);
+    document.querySelector("#editor").style.height = `${document.querySelector(".editor-container").clientHeight - height - 16}px`;
+});
+
+// start observing for resize
+resize_ob.observe(document.querySelector(".ql-toolbar"));
 
 let revealChat = document.getElementById("chat");
 let flag = true;
@@ -128,7 +115,7 @@ revealChat.addEventListener("click", function () {
     let b = document.getElementsByTagName("body")[0];
     if (flag) {
         b.style.gridTemplateColumns = "1fr 0";
-        document.getElementsByClassName("message-container")[0].style.display = "none";
+        document.getElementsByClassName("message-container")[0].style.display = "flex";
         document.getElementsByClassName("editor-container")[0].style.maxWidth = "100vw"
         flag = !flag;
     }

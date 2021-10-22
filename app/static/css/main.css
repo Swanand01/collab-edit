@@ -1,104 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
-.ql-container {
-  font-size: 20px;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 *{
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html{
-  font-size: 10px;
-  font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
 }
 
 body{
   background-color: ghostwhite;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas: 
-  "nav    nav"
-  "editor message"
-  ;
-  height: 100vh;
 }
 
-nav{
+.wrapper{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 8% 87% 5%;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+header{
+  grid-area: header;
   background-color: #4d167d;
-  grid-area: nav;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
   font-size: 1.2rem;
 }
 
-.editor-container{
-  grid-area: editor;
-  max-width: 66vw;
-}
-
-.message-container{
-  display: grid;
-  grid-template-rows: 90% 10%;
-  grid-area: message;
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
-}
-
-#chat-text{
-  background-color: #ffffff;
-  resize: none;
-  height: 100%;
-  border:1px solid black;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  font-size: 1.5rem;
-}
-
-.send{
-  margin-top: 1rem;
-  padding: 1rem 0;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  grid-gap:1rem
-}
-
-#message-box{
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 1rem;
-  border: 1px solid rgb(66, 65, 65);
-}
-
-#submit{
-  background-color: #ffffff;
-  color: #64dd17;
-  border:2px solid #64dd17;
-  border-radius: 1rem;
-}
-
-#icon{
-  font-size:3rem;
+  color: white;
 }
 
 .navbar-button{
   border: none;
   height: 4rem;
-  width: 8rem;
-  border-radius: 5px 5px 5px 5px;
+  width: 10vw;
+  max-width: 10rem;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .navbar-button:hover {background-color: #dbd4d4}
 
-.navbar-button:active{
-  transform: scale(0.98);
+main{
+    display: flex;
 }
 
-#navbar-title, #navbar-filename{
-  cursor: pointer;
-  color: ghostwhite;
+.editor-container{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  max-width: 100%;
+  font-size: 2rem;
+}
+
+#editor{
+  display: inline-block;
+  word-break: break-word;
+  width: 100%;
+  height: 100%;
+  border:1px solid black;
+  font-size: 2rem;
+  border: none;
+}
+
+.message-container{
+    display: none;
+    flex-direction: column;
+    width: 50%;
+    min-width: 200px;
+    max-width: 500px;
+}
+
+#chat-text{
+    display: inline-block;
+    word-break: break-word;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid black;
+    border-top: none;
+    font-size: 1.7rem;
+    overflow-y: scroll;
+}
+
+.send-section{
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  height: 5rem;
+  border-left: 1px solid black;
+}
+
+#message-box{
+  background-color: #ffffff;
+  width: 70%;
+  border-radius: 1rem;
+  padding: 1rem;
+  outline: none;
+  font-size: 1.5rem;
+  border: 1px solid black;
+}
+
+#submit{
+  width: 15%;
+  background-color: #ffffff;
+  color: #64dd17;
+  border:2px solid #64dd17;
+  border-radius: 1rem;
+  height: 100%;
+}
+
+
+footer{
+  position: relative;
+    grid-area: footer;
+    background-color: #4d167d;
+    padding: 0.7rem;
+    text-align: center;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color:white;
+}
+
+footer h3 a{
+  text-decoration: none;
+  color:aquamarine;
+}
+
+footer span{
+  position: absolute;
+  right: 1.5rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+
+::-webkit-scrollbar
+{
+    width: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 5px;
 }
