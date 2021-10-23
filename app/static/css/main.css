@@ -17,11 +17,10 @@ body{
 .wrapper{
     height: 100vh;
     display: grid;
-    grid-template-rows: 8% 87% 5%;
+    grid-template-rows: minmax(4rem,8%) 91%;
     grid-template-areas:
     "header"
-    "main"
-    "footer";
+    "main";
 }
 
 header{
@@ -40,7 +39,7 @@ nav{
 
 .navbar-button{
   border: none;
-  height: 4rem;
+  height: 70%;
   width: 10vw;
   max-width: 10rem;
   border-radius: 5px;
@@ -118,14 +117,14 @@ main{
 }
 
 
-footer{
+/* footer{
   position: relative;
-    grid-area: footer;
-    background-color: #4d167d;
-    padding: 0.7rem;
-    text-align: center;
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    color:white;
+  grid-area: footer;
+  background-color: #4d167d;
+  padding: 0.7rem;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color:white;
 }
 
 footer h3 a{
@@ -137,15 +136,4 @@ footer span{
   position: absolute;
   right: 1.5rem;
   font-size: clamp(1.5rem, 2.5vw, 2rem);
-}
-
-
-::-webkit-scrollbar
-{
-    width: 1rem;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    border-radius: 5px;
-}
+} */

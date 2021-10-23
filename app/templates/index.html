@@ -39,8 +39,6 @@
             {% for document in documents %}
 
             <div class="cards file-cards">
-                <i id="file-icon" class="material-icons">insert_drive_file
-                </i>
                 <a href="{% url 'room' document.document_id %}">{{ document.name }}</a>
             </div>
             {% endfor %}
