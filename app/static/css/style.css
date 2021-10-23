@@ -35,6 +35,7 @@ nav{
     border-radius: 0.5rem;
     cursor:pointer;
 }
+.cards:hover {background-color: #e7e1e1}
 
 .cards a{
     text-decoration: none;
@@ -78,7 +79,6 @@ nav{
     place-items: center;
     grid-gap:2rem;
     width: 30rem;
-    /* background-color: coral; */
     padding: 2rem 2.5rem;
     border-radius: 1rem;
     box-shadow: 1px 1px 43px -1px grey;
@@ -110,7 +110,3 @@ nav{
     width: 100%;
 }
 
-#file-icon{
-    font-size: 8rem;
-    opacity: 0.6;
-}
