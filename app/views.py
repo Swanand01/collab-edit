@@ -26,7 +26,6 @@ def index(request):
     user = CustomUser.objects.get(user_name=uname)
 
     documents = Document.objects.filter(owner=user)
-    print(documents)
 
     if request.method == "POST":
 
@@ -39,7 +38,7 @@ def index(request):
 
         if uname != "":
             return redirect(f'{file_id}/')
-    return render(request, 'index.html', {"documents": documents})
+    return render(request, 'index.html', {"documents": documents, "user_name": request.session.get('user_name')})
 
 
 @login_required
