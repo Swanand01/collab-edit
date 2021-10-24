@@ -43,11 +43,23 @@ def index(request):
 
 @login_required
 def room(request, file_id):
-    uname = request.session.get('user_name')
+    uname = request.session.get('user_name') 
 
     doc = Document.objects.get(document_id=file_id)
     content = doc.content
     filename = doc.name
+
+    if request.method == "POST":
+            file_name = request.POST.get("file_name")
+            doc.name = file_name
+            doc.save()
+
+            return render(request, 'chatroom.html', {
+            "user_name": request.session.get('user_name'),
+            "file_id": file_id,
+            "filename": file_name,
+            "content": content
+        })
 
     if uname != None and uname != "":
         return render(request, 'chatroom.html', {
