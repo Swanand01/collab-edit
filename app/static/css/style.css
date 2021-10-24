@@ -16,6 +16,7 @@ h1{
 
 h2{
     font-size: 1.5rem;
+    align-self: center;
 }
 
 nav{
@@ -57,6 +58,11 @@ nav{
 
 #addFile-btn i{
     font-size: 8rem;
+}
+
+#github-btn i{
+    cursor: pointer;
+    font-size: 2.5rem;
 }
 
 
