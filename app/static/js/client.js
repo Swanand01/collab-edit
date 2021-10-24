@@ -14,10 +14,11 @@ if (content != "") {
     quill.setContents(JSON.parse(content));
 }
 
+// This ResizeObserver watches for changes in toolbar height 
+// and changes editor height accordingly. 
 const resize_ob = new ResizeObserver(function (entries) {
     let rect = entries[0].contentRect;
     let height = rect.height;
-    console.log("toolbar h", height);
     document.querySelector("#editor").style.height = `${document.querySelector(".editor-container").clientHeight - height - 16}px`;
 });
 
@@ -132,6 +133,10 @@ document.querySelector("#message-box").addEventListener("keyup", function (event
     if (event.keyCode === 13) {
         sendMessage();
     }
+});
+
+document.querySelector(".navbar-title").addEventListener("click", function () {
+    window.location.href = window.location.origin + "/app";
 });
 
 

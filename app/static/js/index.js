@@ -13,3 +13,7 @@ document.querySelector("#addFile-btn").addEventListener("click", function (event
     document.querySelector("#close-popup-container").style.display = "inline-block";
     document.querySelector(".create-file-popup").style.display = "inline-block";
 });
+
+document.querySelector("#github-btn").addEventListener("click", function (event) {
+    window.open("https://www.github.com/Swanand01/collab-code", '_blank').focus();
+});

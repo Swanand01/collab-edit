@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *{
     margin: 0;
@@ -7,7 +7,7 @@
 
 html{
     font-size: 10px;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body{
@@ -43,6 +43,10 @@ nav{
   width: 10vw;
   max-width: 10rem;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar-title{
   cursor: pointer;
 }
 
