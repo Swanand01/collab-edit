@@ -39,8 +39,10 @@ nav{
 .cards:hover {background-color: #e7e1e1}
 
 .cards a{
+    padding: 1rem;
     text-decoration: none;
     font-size: 1.7rem;
+    word-break: break-all;
 }
 
 .card-container{

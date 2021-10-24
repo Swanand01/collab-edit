@@ -41,7 +41,6 @@
             </div>
             {% if documents %}
             {% for document in documents %}
-
             <div class="cards file-cards">
                 <a href="{% url 'room' document.document_id %}">{{ document.name }}</a>
             </div>
