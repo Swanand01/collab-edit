@@ -4,6 +4,7 @@ from .models import CustomUser, Document
 
 # Register your models here.
 admin.site.register(Document)
+admin.site.register(CustomUser)
 
 
 class CustomUserCreationForm(UserCreationForm):
