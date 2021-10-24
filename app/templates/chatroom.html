@@ -26,7 +26,12 @@
     <header>
       <nav>
         <h1 class="navbar-title">Collab-edit</h1>
-        <h2 class="room-id">{{ filename }}</h2>
+        <!-- <h2 class="room-id">{{ filename }}</h2> -->
+        <form action="" method="POST" class="form-container">
+          {% csrf_token %}
+          <input type="text" name="file_name" id="file_name" value={{filename}}>
+          <input type="submit" value="Rename"/>
+        </form>
         <div>
           <button class="navbar-button" id="save"><i class="material-icons">save</i></button>
           <button class="navbar-button" id="chat"><i class="material-icons">chat</i></button>
