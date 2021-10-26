@@ -90,7 +90,6 @@ nav{
     padding: 2rem 2.5rem;
     border-radius: 1rem;
     box-shadow: 1px 1px 43px -1px grey;
-
 }
 
 #file_name{
@@ -114,7 +113,7 @@ nav{
     z-index: 8;
     display: none;
     position: absolute;
-    height: calc(100vh - 44px);
+    height: calc(100vh - 4.48rem);
     width: 100%;
 }
 
