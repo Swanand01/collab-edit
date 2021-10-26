@@ -111,6 +111,16 @@ chatSocket.onmessage = function (e) {
 
 };
 
+let renameButton = document.getElementById("rename");
+let renamePopup = document.querySelector(".form-container");
+renameButton.addEventListener("click", event => {
+    renamePopup.style.display = "grid";
+});
+
+document.querySelector("#rename-popup-close").addEventListener("click", event => {
+    renamePopup.style.display = "";
+});
+
 
 revealChat.addEventListener("click", function () {
     let b = document.getElementsByTagName("body")[0];
