@@ -54,12 +54,7 @@ def room(request, file_id):
             doc.name = file_name
             doc.save()
 
-            return render(request, 'chatroom.html', {
-            "user_name": request.session.get('user_name'),
-            "file_id": file_id,
-            "filename": file_name,
-            "content": content
-        })
+            return redirect(f'/app/{file_id}')
 
     if uname != None and uname != "":
         return render(request, 'chatroom.html', {
