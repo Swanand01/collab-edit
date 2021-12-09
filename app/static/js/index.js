@@ -15,5 +15,5 @@ document.querySelector("#addFile-btn").addEventListener("click", function (event
 });
 
 document.querySelector("#github-btn").addEventListener("click", function (event) {
-    window.open("https://www.github.com/Swanand01/collab-code", '_blank').focus();
+    window.open("https://www.github.com/Swanand01/collab-edit", '_blank').focus();
 });
