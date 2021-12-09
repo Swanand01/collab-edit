@@ -7,8 +7,9 @@ Built on WebSockets, with Django and Django Channels.
 
 Comes with a WYSIWYG rich text editor, QuillJS.
 ## Demo
+![Home page](https://github.com/Swanand01/collab-edit/blob/main/gifs/Capture1.PNG)
+![Editor page](https://github.com/Swanand01/collab-edit/blob/main/gifs/recording.gif)
 
-https://github.com/Swanand01/collab-edit/blob/main/gifs/Capture1.PNG
 
 
 ## Run Locally
